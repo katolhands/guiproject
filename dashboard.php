@@ -7,12 +7,10 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Create uploads folder if not exists
 if (!is_dir('uploads')) {
     mkdir('uploads', 0777, true);
 }
 
-// Handle Google Drive link addition
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['google_link'])) {
     $link = trim($_POST['google_link']);
     $name = trim($_POST['file_name']);
@@ -26,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['google_link'])) {
     }
 }
 
-// Handle file deletion
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
     $stmt = $conn->prepare("DELETE FROM files WHERE id = ?");
@@ -69,7 +66,6 @@ $result = $conn->query("SELECT * FROM files ORDER BY id DESC");
                             <a href="<?php echo htmlspecialchars($row['link']); ?>" target="_blank">
                                 <?php echo htmlspecialchars($row['name']); ?>
                             </a>
-                            <!-- Add delete button aligned to the right -->
                             <a href="?delete=<?php echo $row['id']; ?>" class="delete-btn" onclick="return confirm('Delete this file?');">Delete</a>
                         </li>
                     <?php endwhile; ?>
