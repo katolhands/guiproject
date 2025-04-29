@@ -55,6 +55,7 @@ a:hover {
 }
 
 .delete-btn {
+    color: white;
     background-color: #e53e3e; 
     padding: 8px 16px;
     margin-left: 10px;
